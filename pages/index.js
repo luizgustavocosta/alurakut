@@ -21,6 +21,28 @@ function ProfileSidebar(propriedades) {
   )
 }
 
+function ProfileRelationsBox(properties) {
+  return (
+    <ProfileRelationsBoxWrapper>
+    <h2 className="smallTitle">
+      {properties.title} ({properties.items.length})
+    </h2>
+    <ul>
+      {/*{pessoasFavoritas.map((itemAtual) => {*/}
+      {/*  return (*/}
+      {/*    <li key={itemAtual}>*/}
+      {/*      <a href={`/users/${itemAtual}`} key={itemAtual}>*/}
+      {/*        <img src={`http://github.com/${itemAtual}.png`}/>*/}
+      {/*        <span>{itemAtual}</span>*/}
+      {/*      </a>*/}
+      {/*    </li>*/}
+      {/*  )*/}
+      {/*})}*/}
+    </ul>
+  </ProfileRelationsBoxWrapper>
+  )
+}
+
 export default function Home() {
   const usuarioAleatorio = 'luizgustavocosta';
   const [comunidades, setComunidades] = React.useState([{
@@ -29,6 +51,9 @@ export default function Home() {
     image: "https://a-static.mlcdn.com.br/618x463/cd-racionais-mcs-fim-de-semana-no-parque-radar-records/cluberadar/425/698b4fb042e846c33911592c75c58839.jpg"
   //  Generic image
   //  http://picsum.photos/200/300
+    // dogstatus
+    //https://www.datocms.com
+    //https://temp-mail.org
   }]);
   const pessoasFavoritas = [
     'juunegreiros',
@@ -38,6 +63,19 @@ export default function Home() {
     'marcobrunodev',
     'felipefialho'
   ]
+
+  const [followers, setFollowers] = React.useState([]);
+
+  React.useEffect(()=> {
+    fetch('https://api.github.com/users/luizgustavocosta/followers')
+      .then((serverResponse) => {
+        return serverResponse.json();
+      })
+      .then((responseAsJson)=> {
+        setFollowers(responseAsJson);
+      })
+  }, [] )
+  // [] - only once
 
   return (
     <>
@@ -87,6 +125,7 @@ export default function Home() {
           </Box>
         </div>
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
+          <ProfileRelationsBox items={followers} title="Followers"/>
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
               Comunidades ({comunidades.length})
