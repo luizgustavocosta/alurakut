@@ -82,3 +82,20 @@ export default () => (
 ```
 
 </details>
+
+<GraphQL>
+query {
+  allCommunities {
+    title
+    id
+    imageUrl
+    creatorSlug
+  }
+}
+</GraphQL>
+<BFF>
+http://localhost:3000/api/communities
+</BFF>
+
+<References>
+</References>
