@@ -99,3 +99,10 @@ http://localhost:3000/api/communities
 
 <References>
 </References>
+
+<section>
+jwt.io
+</section>
+<cookies>
+* Add cookies - nookies
+</cookies>

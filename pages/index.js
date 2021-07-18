@@ -1,5 +1,7 @@
 import React from "react";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
+import nookies from "nookies";
+import jwt from 'jsonwebtoken'
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import {AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet} from '../src/lib/AlurakutCommons';
@@ -43,13 +45,12 @@ function ProfileRelationsBox(properties) {
   )
 }
 
-export default function Home() {
-  const randomUser = 'luizgustavocosta';
+export default function Home(props) {
+  const randomUser = props.githubUser;
   const [communities, setCommunities] = React.useState([{
     // id: uuidv4(),
     // title: "Eu ouço Racionais",
     // image: "https://a-static.mlcdn.com.br/618x463/cd-racionais-mcs-fim-de-semana-no-parque-radar-records/cluberadar/425/698b4fb042e846c33911592c75c58839.jpg"
-
 
     //  Generic image
     //  http://picsum.photos/200/300
@@ -67,9 +68,8 @@ export default function Home() {
   ]
 
   const [followers, setFollowers] = React.useState([]);
-
   React.useEffect(() => {
-    fetch('https://api.github.com/users/luizgustavocosta/followers')
+    fetch('https://api.github.com/users/' + randomUser + '/followers')
       .then((serverResponse) => {
         return serverResponse.json();
       })
@@ -77,10 +77,11 @@ export default function Home() {
         setFollowers(responseAsJson);
       })
     // Calling via GraphQL
+    const token = 'CHECK THE .env file'
     fetch('https://graphql.datocms.com/', {
       method: 'POST',
       headers: {
-        'Authorization': '839e24e1b6019bf1a8ea741af96f45',
+        'Authorization': token,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
@@ -94,7 +95,9 @@ export default function Home() {
           }
         }`
       })
-    }).then((response) => response.json())
+    }).then((response) => {
+      return response.json()
+    })
       .then((jsonFromServer) => {
         const graphQLCommunities = jsonFromServer.data.allCommunities;
         setCommunities(graphQLCommunities)
@@ -106,7 +109,6 @@ export default function Home() {
     <>
       <AlurakutMenu/>
       <MainGrid>
-        {/* <Box style="grid-area: profileArea;"> */}
         <div className="profileArea" style={{gridArea: 'profileArea'}}>
           <ProfileSidebar githubUser={randomUser}/>
         </div>
@@ -187,7 +189,7 @@ export default function Home() {
               {pessoasFavoritas.map((itemAtual) => {
                 return (
                   <li key={itemAtual}>
-                    <a href={`/users/${itemAtual}`} key={itemAtual}>
+                    <a href={`/users/${itemAtual}`} key={itemAtual.id}>
                       <img src={`http://github.com/${itemAtual}.png`}/>
                       <span>{itemAtual}</span>
                     </a>
@@ -200,4 +202,31 @@ export default function Home() {
       </MainGrid>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context)
+  const token = cookies.USER_TOKEN;
+  const {isAuthenticated} = await fetch('https://alurakut.vercel.app/api/auth', {
+    headers: {
+      Authorization: token
+    }
+  })
+    .then((resposta) => resposta.json())
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
+  const {githubUser} = jwt.decode(token);
+  return {
+    props: {
+      githubUser
+    }, // will be passed to the page component as props
+  }
 }
