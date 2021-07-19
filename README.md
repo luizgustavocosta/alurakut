@@ -106,3 +106,43 @@ jwt.io
 <cookies>
 * Add cookies - nookies
 </cookies>
+<aula1>
+- Pegar os dados da API do GitHub e listar seus seguidores
+- Adicionar quão confiável, legal e sexy você é
+- Usar Strategy ao invés de vários ifs no css - https://www.youtube.com/watch?v=S-jqd6WZ7M0
+- Separar e organizar o seu código
+- Publicar o seu projeto
+- Deixar o seu projeto com a sua cara
+</aula1>
+<aula2>
+- Criar suas comunidades para compartilhar com a gente;
+- Facilitar o cadastro da url da imagem;
+- Adicionar links para as suas comunidades
+- Adicionar o seu projeto na nossa vitrine;
+- Deixar o seu read me do projeto bonitão.
+</aula2>
+<aula3>
+- Terminar de listar seus seguidores através da api do Github;
+- Adicionar suas comunidades no DatoCMS;
+- Organizar os seus dados, pensando no que irá querer que apareça no seu Alurakut e criando os modelos que precisar;
+- Subir sua aplicação na Vercel.
+</aula3>
+<aula4>
+Variaveis de ambiente - https://www.youtube.com/watch?v=BP2KQtCyzo8
+Configurar suas variáveis de ambiente;
+Fazer os scraps;
+Subir sua aplicação na Vercel.
+</aula4>
+<aula5>
+- Fazer o logout da aplicação;
+- Mensagem de feedback quando não conseguir logar na aplicação;
+- Criar página de perfil do usuário;
+- Subir a sua aplicação na Vercel e compartilhar com a gente.
+</aula5>
+
+//Organize
+//  Generic image
+//  http://picsum.photos/200/300
+// dogstatus
+//https://www.datocms.com
+//https://temp-mail.org

@@ -4,8 +4,7 @@ import {SiteClient} from 'datocms-client';
 export default async function handle(request, response) {
 
   if ('POST' === request.method) {
-    const TOKEN = 'CHECK the .env'
-    const client = new SiteClient(TOKEN);
+    const client = new SiteClient(process.env.DATO_CMS_WRITE_TOKEN);
 
     const record = await client.items.create({
       itemType: '975964', //Fixed value - Don't change
