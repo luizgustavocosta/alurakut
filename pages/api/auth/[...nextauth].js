@@ -6,12 +6,29 @@ import Providers from "next-auth/providers"
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
+    Providers.Facebook({
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+    }),
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       // https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-apps
       scope: "read:user"
-    })
+    }),
+    Providers.Google({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+    Providers.Twitter({
+      clientId: process.env.TWITTER_ID,
+      clientSecret: process.env.TWITTER_SECRET,
+    }),
+    Providers.Auth0({
+      clientId: process.env.AUTH0_ID,
+      clientSecret: process.env.AUTH0_SECRET,
+      domain: process.env.AUTH0_DOMAIN,
+    }),
   ],
 
   // The secret should be set to a reasonably long random string.
