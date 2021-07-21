@@ -139,10 +139,22 @@ Subir sua aplicação na Vercel.
 - Criar página de perfil do usuário;
 - Subir a sua aplicação na Vercel e compartilhar com a gente.
 </aula5>
+<oauth>
+https://github.com/settings/developers
+</oauth>
+<site_about_login>
 
+</site_about_login>
+<vercel>
+https://vercel.com/docs/environment-variables
+</vercel>
 //Organize
 //  Generic image
 //  http://picsum.photos/200/300
 // dogstatus
 //https://www.datocms.com
 //https://temp-mail.org
+<login>
+Add login via Google / GitHub etc
+Change the GitHubApi to Cassandra
+</login>
