@@ -1,4 +1,5 @@
-//BFF
+//BFF Best friend forever?
+//Backend for frontend
 import {SiteClient} from 'datocms-client';
 
 export default async function handle(request, response) {

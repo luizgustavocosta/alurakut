@@ -1,20 +1,19 @@
 import Layout from '../src/components/layout'
 import React from "react";
-import nookies from "nookies";
-import jwt from 'jsonwebtoken'
+import {parseCookies} from "nookies";
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import {AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet} from '../src/lib/AlurakutCommons';
 import {ProfileRelationsBoxWrapper} from '../src/components/ProfileRelations';
 
-function ProfileSidebar(properties) {
+function ProfileSidebar(props) {
   return (
     <Box as="aside">
-      <img src={`https://github.com/${properties.githubUser}.png`} style={{borderRadius: '8px'}}/>
+      <img src={`https://github.com/${props.githubUser}.png`} style={{borderRadius: '8px'}}/>
       <hr/>
       <p>
-        <a className="boxLink" href={`https://github.com/${properties.githubUser}`}>
-          @{properties.githubUser}
+        <a className="boxLink" href={`https://github.com/${props.githubUser}`}>
+          @{props.githubUser}
         </a>
       </p>
       <hr/>
@@ -29,7 +28,7 @@ function FollowersBox(properties) {
       <h2 className="smallTitle">
         {properties.title} ({properties.items.length})
       </h2>
-      <ul>
+      <ul key={"follower"}>
         {properties.items.slice(0, 6).map((follower) => {
           return (
             <li key={follower.id}>
@@ -46,13 +45,11 @@ function FollowersBox(properties) {
 }
 
 export default function Home(props) {
-
-  const currentUser = "luizgustavocosta"//props.githubUser;
+  const currentUser = parseCookies().USER_TOKEN;
+  if (currentUser === "") return (<div>NOT FOUND</div>);
   const [communities, setCommunities] = React.useState([{}]);
   const [followings, setFollowings] = React.useState([{}]);
   const [followers, setFollowers] = React.useState([]);
-  const cookies = nookies.get("tz")
-  console.log("cookies["+JSON.stringify(cookies)+"]");
 
   React.useEffect(() => {
     fetch('https://api.github.com/users/' + currentUser + '/following')
@@ -192,30 +189,4 @@ export default function Home(props) {
         </MainGrid>
     </>
   )
-}
-export async function getServerSideProps(context) {
-  const cookies = nookies.get(context)
-  const token = cookies.USER_TOKEN;
-  const {isAuthenticated} = await fetch('https://alurakut.vercel.app/api/auth', {
-    headers: {
-      Authorization: token
-    }
-  })
-    .then((resposta) => resposta.json())
-
-  if (!isAuthenticated) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      }
-    }
-  }
-
-  const {githubUser} = jwt.decode(token);
-  return {
-    props: {
-      githubUser
-    }, // will be passed to the page component as props
-  }
 }
