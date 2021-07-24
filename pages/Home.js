@@ -1,6 +1,4 @@
-import Layout from '../src/components/layout'
 import React from "react";
-import {parseCookies} from "nookies";
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import {AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet} from '../src/lib/AlurakutCommons';
@@ -45,7 +43,11 @@ function FollowersBox(properties) {
 }
 
 export default function Home(props) {
-  const currentUser = props.session && props.session.user ? props.session.user : "";
+  const mySession = JSON.stringify(props.session)
+  let currentUser = "";
+  if (undefined !== mySession) {
+    currentUser = mySession.substring(mySession.indexOf("name"), mySession.indexOf("email")).replace(":","").replace("name\"","").replace(",","").replaceAll("\"","");
+  }
   if (currentUser === "") return (<div>NOT FOUND</div>);
   const [communities, setCommunities] = React.useState([{}]);
   const [followings, setFollowings] = React.useState([{}]);

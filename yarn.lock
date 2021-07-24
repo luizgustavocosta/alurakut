@@ -2695,7 +2695,7 @@ mz@^2.4.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nanoid@^3.1.22:
+nanoid@^3.1.18, nanoid@^3.1.22:
   version "3.1.23"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
@@ -2724,6 +2724,14 @@ next-auth@latest:
     preact "^10.4.1"
     preact-render-to-string "^5.1.14"
     querystring "^0.2.0"
+
+next-session@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/next-session/-/next-session-3.4.0.tgz#799757624a336b752298e9771ffc1d7282d76e91"
+  integrity sha512-JBROZVndV3vBMdELMOmnm1mWNKzjSTl4niwnuVMjAhcW5Cn9UAS3YkQyOJ1I5LSiLNOxVheQ7BTuxE4nx6SDwQ==
+  dependencies:
+    cookie "^0.4.1"
+    nanoid "^3.1.18"
 
 next-tick@1:
   version "1.1.0"
