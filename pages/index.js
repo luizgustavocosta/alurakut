@@ -1,6 +1,5 @@
 import Layout from '../src/components/layout'
 import nookies, {parseCookies} from "nookies";
-import UserSession from "./UserSession";
 
 export default function Page() {
   return (
@@ -18,7 +17,7 @@ export async function getServerSideProps(context) {
   })
   return {
     props: {
-      githubUser: UserSession.getName()
+      githubUser: "XDS"
     },
   }
 }

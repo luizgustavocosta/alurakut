@@ -1,9 +1,13 @@
 import NextAuth from "next-auth"
 import Providers from "next-auth/providers"
-import Store from "../../Store";
+import Store from "../../../src/components/Store";
+import {useContext} from "react";
+import nookies, {parseCookies} from "nookies";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
+const userId = "";
+
 export default NextAuth({
   providers: [
     Providers.GitHub({
@@ -12,6 +16,7 @@ export default NextAuth({
       scope: "read:user"
     })
   ],
+  database: process.env.DATABASE_URL,
   secret: process.env.SECRET,
 
   session: {
@@ -32,15 +37,15 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
     async signIn(user, account, profile) {
-      await Store(profile['login'])
+      user.name = profile['login'];
       return true
     },
     // async redirect(url, baseUrl) {
     //   return baseUrl
     // },
-    // async session(session, user) {
-    //   return session
-    // },
+    async session(session, user) {
+      return session
+    },
     // async jwt(token, user, account, profile, isNewUser) {
     //   return token
     // }

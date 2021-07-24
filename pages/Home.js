@@ -45,7 +45,7 @@ function FollowersBox(properties) {
 }
 
 export default function Home(props) {
-  const currentUser = parseCookies().USER_TOKEN;
+  const currentUser = props.session && props.session.user ? props.session.user : "";
   if (currentUser === "") return (<div>NOT FOUND</div>);
   const [communities, setCommunities] = React.useState([{}]);
   const [followings, setFollowings] = React.useState([{}]);

@@ -31,17 +31,7 @@ export default function Header () {
           </>}
           {session && <>
             {session.user.image && <span style={{backgroundImage: `url(${session.user.image})` }} className={styles.avatar}/>}
-            <Home />
-            {/*<a*/}
-            {/*  href={`/api/auth/signout`}*/}
-            {/*  className={styles.button}*/}
-            {/*  onClick={(e) => {*/}
-            {/*    e.preventDefault()*/}
-            {/*    signOut()*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  Sign out*/}
-            {/*</a>*/}
+            <Home {...{session}}/>
           </>}
         </p>
       </div>
