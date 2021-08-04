@@ -43,12 +43,12 @@ function FollowersBox(properties) {
 }
 
 export default function Home(props) {
-  const mySession = JSON.stringify(props.session)
-  let currentUser = "";
-  if (undefined !== mySession) {
-    currentUser = mySession.substring(mySession.indexOf("name"), mySession.indexOf("email")).replace(":","").replace("name\"","").replace(",","").replaceAll("\"","");
-  }
-  if (currentUser === "") return (<div>NOT FOUND</div>);
+  //const mySession = JSON.stringify(props.session)
+  let currentUser = "luizgustavocosta";
+  // if (undefined !== mySession) {
+  //   currentUser = mySession.substring(mySession.indexOf("name"), mySession.indexOf("email")).replace(":","").replace("name\"","").replace(",","").replaceAll("\"","");
+  // }
+  // if (currentUser === "") return (<div>NOT FOUND</div>);
   const [communities, setCommunities] = React.useState([{}]);
   const [followings, setFollowings] = React.useState([{}]);
   const [followers, setFollowers] = React.useState([]);
